@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row pt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 p-5" style="background-color: #c859ff">
+      <h1 class="text-center">LOG IN</h1>
+      <p class="text-center">Login for existing users</p>
+      <br />
+
+      <form action="/route/login" method="POST">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            name="username"
+            id="email"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            id="password"
+          />
+        </div>
+
+        <div class="text-center mb-3">
+          <button type="submit" class="btn btn-warning">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -19,9 +19,13 @@
             <a class="nav-link active" aria-current="page" href="/">Product</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
+            {{#if user}}
+            <a class="nav-link" href="/cart">Cart</a>
+            {{else}}
+            <a class="nav-link" href="/login">Cart</a>
+            {{/if}}
           </li>
-          {{! <li class="nav-item dropdown">
+           {{!-- <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
@@ -40,12 +44,31 @@
                   </li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
-              </li> }}
+              </li>  --}}
           <li class="nav-item">
+            {{#if user}}
             <a class="nav-link">Orders</a>
+            {{/if}}
           </li>
         </ul>
-       <a class="btn btn-primary" href="/login" role="button">Login</a>
+        {{#if user}}
+          <h4
+            class="p-2 rounded mb-2 bg-info text-white"
+            style="margin-right: 10px ;"
+          >{{user.Name}}
+          </h4>
+
+        {{else}}
+          <h4 class="text-danger" style="margin-right: 10px ;">Account </h4>
+        {{/if}}
+
+        {{#if user}}
+          <a class="btn btn-primary" href="/logout" role="button">LogOut</a>
+
+        {{else}}
+          <a class="btn btn-primary" href="/login" role="button">Login</a>
+        {{/if}}
+
       </div>
     </div>
   </nav>

@@ -1,7 +1,8 @@
 <section>
   <div class="container">
     <div class="row mt-5">
-      <a href="/admin/add-product" class="btn btn-success ml-auto col-md-2">Add Product</a>
+      <a href="/admin/add-product" class="btn btn-success ml-auto col-md-2">Add
+        Product</a>
     </div>
     <table class="table mt-5">
       <thead>
@@ -27,6 +28,13 @@
                 alt=""
                 style="width: 70px; height: 70px;"
               /></td>
+            <td><a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+              <a
+                href="/admin/delete-product/{{this._id}}"
+                class="btn btn-danger" onclick="return confirm('Want to delete {{this.Name}}?')"
+              >Delete</a>
+
+            </td>
           </tr>
         {{/each}}
 

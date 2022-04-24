@@ -1,0 +1,36 @@
+<section>
+  <div class="container">
+    <div class="row mt-5 mb-1">
+      <a href="/admin/add-user" class="btn btn-success ml-auto col-md-2">Add
+        User</a>
+    </div>
+    <table class="table mt-5">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">User-Name</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody class="">
+        {{#each users}}
+          <tr>
+            {{! <th scope="row"></th> }}
+            <td>{{this._id}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Email}}</td>
+            <td><a href="/admin/edit-user?id={{this._id}}" class="btn btn-primary">Edit</a>
+              <a
+                href="/admin/delete-user/{{this._id}}"
+                class="btn btn-danger"
+                onclick="return confirm('Want to delete {{this.Name}}?')"
+              >Delete</a>
+
+            </td>
+          </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>

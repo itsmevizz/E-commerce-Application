@@ -10,6 +10,8 @@ var hbs = require("express-handlebars");
 var fileUpload = require("express-fileupload");
 var db = require("./config/connection");
 var session = require("express-session");
+const flash = require('connect-flash');
+
 
 var app = express();
 
@@ -25,6 +27,15 @@ app.engine(
     partialsDir: __dirname + "/views/partials/",
   })
 );
+app.use((req, res, next) => {
+  if (!req.user) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
+  }
+  next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -33,6 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 app.use(session({ secret: "Key", cookie: { maxAge: 900000 } }));
+app.use(flash());
 
 db.connect((err) => {
   if (err) {

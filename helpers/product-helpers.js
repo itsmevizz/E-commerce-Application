@@ -33,7 +33,7 @@ module.exports = {
         });
     });
   },
-  getProductDetailes: (productId) => {
+  getProDetails: (productId) => {
     return new Promise((resolve, reject) => {
       db.get()
         .collection(collection.PRODUCT_COLLECTION)
@@ -43,7 +43,7 @@ module.exports = {
         });
     });
   },
-  updateProduct: (productId, ProductDetailes) => {
+  updateProduct: (productId,proDetails) => {
     return new Promise((resolve, reject) => {
       db.get()
         .collection(collection.PRODUCT_COLLECTION)
@@ -51,10 +51,10 @@ module.exports = {
           { _id: objectId(productId) },
           {
             $set: {
-              Name: ProductDetailes.Name,
-              Description: ProductDetailes.Description,
-              Price: ProductDetailes.Price,
-              Category: ProductDetailes.Category,
+              Name:proDetails.Name,
+              Description:proDetails.Description,
+              Price:proDetails.Price,
+              Category:proDetails.Category
             },
           }).then((response)=>{
             resolve()

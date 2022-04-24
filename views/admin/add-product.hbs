@@ -18,7 +18,14 @@
 
                     <label for="">Image</label>
                     <input type="file" name="Image" class="form-control">
-                    <button type="submit" class="btn btn-success mt-4">Submit</button>
+                    {{#if failed}}
+                    <p class="text-danger">{{failed}}</p>
+                    {{else}}
+                    {{#if success}}
+                    <p class="text-success">{{success}}</p>
+                    {{/if}}
+                    {{/if}}
+                    <button type="submit" class="btn btn-success mt-2">Submit</button>
                 </form>
             </div>
         </div>

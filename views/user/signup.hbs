@@ -8,7 +8,10 @@
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-                <form action="/signup" method="POST">
+                {{#if loginErr}}
+                <span class="text-danger mb-4 text-center">{{loginErr}}</span>
+                {{/if}}
+                <form action="/signup" method="POST" id="submit-form">
                  <div class="mb-3">
                     <label
                       for="exampleInputEmail1"
@@ -21,7 +24,9 @@
                       name="Name"
                       id="name"
                       aria-describedby="emailHelp"
+                      onkeyup="validateName()"
                     />
+                    <span id="name-error" class="text-danger"> </span>
                   </div>
                   <div class="mb-3">
                     <label
@@ -29,13 +34,15 @@
                       class="form-label"
                     >Email</label>
                     <input
-                      type="text"
+                      type="email"
                       class="form-control"
                       placeholder="Username"
                       name="Email"
                       id="email"
                       aria-describedby="emailHelp"
+                      onkeyup="validateEmail()"
                     />
+                    <span id="email-error" class="text-danger"></span>
                   </div>
                   <div class="mb-3">
                     <label
@@ -48,11 +55,14 @@
                       class="form-control"
                       placeholder="Password"
                       id="password"
+                      onkeyup="validatePassword()"
                     />
+                    <span id="password-error" class="text-danger"></span>
                   </div>
 
                   <div class="text-center mb-3">
-                    <button type="submit" class="btn btn-warning">Sign up</button>
+                    <button type="submit" class="btn btn-warning" onclick="return validateForm()" name="submit" id="submit">Sign up</button>
+                    <span id="submit-error" class="text-danger ms-3"></span>
                   </div>
                 </form>
                   <a href="/login">Already have an account login ?</a> 
@@ -62,7 +72,7 @@
               >
 
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  src="https://d1idiaqkpcnv43.cloudfront.net/website1.0/images/sign-up.png"
                   class="img-fluid"
                   alt="Sample image"
                 />
@@ -75,3 +85,66 @@
     </div>
   </div>
 </section>
+
+<script>
+  
+var nameError = document.getElementById('name-error');
+var nameOk = document.getElementById("done");
+var emailError = document.getElementById('email-error');
+var messageError = document.getElementById('password-error');
+var submitError = document.getElementById('submit-error');
+
+
+function validateName(){
+    var name = document.getElementById('name').value;
+
+    if(name.length==0){
+        nameError.innerHTML= 'Name is required';
+        return false;
+    }
+    if(!name.match(/^[A-Za-z]{2,10}\s*[A-Za-z]*\s*[A-Za-z]*[A-Za-z]$/)){
+        nameError.innerHTML='Write full name';
+        return false;
+    }
+    nameError.innerHTML = '';
+    return true;
+}
+
+function validateEmail(){
+    var email = document.getElementById('email').value;
+
+    if(email.length==0){
+        emailError.innerHTML='Email is required'
+        return false;
+    }
+    if(!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][com]{3}$/)){
+        emailError.innerHTML = 'Email invalid'
+        return false;
+    }
+    emailError.innerHTML = '';
+    return true;
+}
+
+function validatePassword(){
+    var message = document.getElementById('password').value;
+    var required=4;
+    var left=required-message.length;
+
+    if(left>0){
+        messageError.innerHTML=left+'more character required';
+        return false;
+    }
+
+    messageError.innerHTML= '';
+    return true;
+}
+
+function validateForm(){
+    if(!validateName() || !validateEmail() || !validatePassword()){
+
+        submitError.innerHTML='Please fill  and submit';
+        {{!-- setTimeout(function(){submitError.style.display='none';},3000); --}}
+        return false;
+    }
+}
+</script>
